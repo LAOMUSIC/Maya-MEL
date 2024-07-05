@@ -1,0 +1,36 @@
+LAOMUSIC ARTS 2024
+
+presents
+
+Maya: move ANY selected object back to the center of the world
+Here it is my solution: 
+- create a MEL tab and copy/paste this snippet:
+
+// Get the selected object(s)
+string $selectedObjects[] = `ls -sl`;
+
+// Check if any objects are selected
+if (size($selectedObjects) > 0) {
+    // Loop through each selected object and move it to the origin
+    for ($obj in $selectedObjects) {
+        // Move the object to the origin using -rpr to preserve the parent transformation
+        move -rpr 0 0 0 $obj;
+    }
+    print("Selected object(s) have been moved to the center of the world.\n");
+} else {
+    print("No object selected. Please select an object to center.\n");
+}
+
+
+This script does the following:
+
+
+1. `ls -sl` lists the currently selected objects and stores them in the `$selectedObjects` array.
+2. It checks if any objects are selected using the `size($selectedObjects)` function.
+3. If objects are selected, it iterates through each object in the array.
+4. The `move -rpr 0 0 0 $obj;` command moves each object to the origin, preserving the parent transformation.
+5. If no objects are selected, it prints a message prompting the user to select an object.
+
+Hope this helps others too!
+
+LAO
